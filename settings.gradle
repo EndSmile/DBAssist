@@ -1,0 +1,1 @@
+include ':app', ':dbassist-annotations', ':dbassist-compiler'
