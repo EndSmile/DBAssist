@@ -69,8 +69,6 @@ public class DBAssistProcessor extends AbstractProcessor {
                 e.printStackTrace();
             }
 
-
-
             try {
                 JavaFile.builder(packageName, result.build())
                         .addFileComment("Generated code from DBAssist. Do not modify!")

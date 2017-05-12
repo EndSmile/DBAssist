@@ -30,6 +30,7 @@ public class InheritPart extends ABAssistPart {
             String className = e.getTypeMirror().toString();
             typeSpecBuilder.superclass(TypeVariableName.get(className));
         }
+
     }
 
 }

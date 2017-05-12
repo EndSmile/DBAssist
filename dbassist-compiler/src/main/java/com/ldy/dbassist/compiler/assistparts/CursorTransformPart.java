@@ -1,9 +1,12 @@
 package com.ldy.dbassist.compiler.assistparts;
 
 import com.ldy.dbassist.compiler.Utils;
+import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeVariableName;
+
+import java.util.List;
 
 import javax.annotation.processing.Messager;
 import javax.lang.model.element.Element;
@@ -31,16 +34,20 @@ public class CursorTransformPart extends ABAssistPart {
         String className = Utils.uncapitalize(tabElement.getSimpleName().toString());
         String cursorParams = "cursor";
         String columnsName = "columns";
+        String listName = "list";
+        String listTypeStr = "java.util.List<" + tabElement.asType().toString() + ">";
         MethodSpec.Builder builder = MethodSpec.methodBuilder(METHOD_NAME)
                 .addModifiers(PUBLIC, STATIC)
                 .addParameter(TypeVariableName.get(TYPE_VALUES)
                         , "cursor")
                 .addParameter(TypeVariableName.get("String..."), columnsName)
-                .returns(TypeVariableName.get(tabElement.asType().toString()));
+                .returns(TypeVariableName.get(listTypeStr));
 
+        builder.addStatement("$L $L = new java.util.ArrayList<>()", listTypeStr, listName);
+
+        builder.addCode("while($L.moveToNext()){\n",cursorParams);
         builder.addStatement("$L $L = new $L()", tabElement.getQualifiedName(), className, tabElement.getQualifiedName());
-
-        builder.addCode("if($L==null){\n", columnsName);
+        builder.addCode("if($L==null||$L.length==0){\n", columnsName,columnsName);
         for (Element childElement : tabElement.getEnclosedElements()) {
             if (!isColumn(childElement)) {
                 continue;
@@ -49,6 +56,7 @@ public class CursorTransformPart extends ABAssistPart {
 
         }
         builder.addCode("}else{\n");
+        //当传入列名时，为传入的列单独赋值
         builder.addCode("for(String column:$L){\n", columnsName);
         for (Element childElement : tabElement.getEnclosedElements()) {
             if (!isColumn(childElement)) {
@@ -60,8 +68,12 @@ public class CursorTransformPart extends ABAssistPart {
         }
         builder.addCode("}\n");
         builder.addCode("}\n");
+        builder.addStatement("$L.add($L)",listName,className);
+        builder.addCode("}\n");
+        builder.addStatement("$L.close()",cursorParams);
+        builder.addStatement("return $L", listName);
 
-        builder.addStatement("return $L", className);
+        builder.addJavadoc("取出cursor中的值并生成list，$L为null时则默认取出cursor中的全部列</p>\n注意:操作结束后cursor会被关闭",columnsName);
         typeSpecBuilder.addMethod(builder.build());
 
     }

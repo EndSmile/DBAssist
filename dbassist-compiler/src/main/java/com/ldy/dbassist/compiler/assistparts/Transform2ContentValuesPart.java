@@ -38,7 +38,7 @@ public class Transform2ContentValuesPart extends ABAssistPart {
         builder.addStatement("$L values = new $L()",TYPE_VALUES,TYPE_VALUES);
         builder.addStatement("if($L==null){return values;}",classParamsName);
 
-        builder.addCode("if($L==null){\n",columnsName);
+        builder.addCode("if($L==null||$L.length==0){\n", columnsName,columnsName);
         for (Element childElement:tabElement.getEnclosedElements()) {
             if (!isColumn(childElement)) {
                 continue;
@@ -63,6 +63,7 @@ public class Transform2ContentValuesPart extends ABAssistPart {
         builder.addCode("}\n");
         builder.addCode("}\n");
         builder.addStatement("return values");
+        builder.addJavadoc("取出$L中的值并返回ContentValues，$L为null时则默认取出所有数据库对应的所有列",classParamsName,columnsName);
         typeSpecBuilder.addMethod(builder.build());
     }
 
