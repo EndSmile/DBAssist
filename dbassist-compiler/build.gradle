@@ -11,3 +11,7 @@ dependencies {
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+ext.projectArtifactId   = "dbassist-compiler"
+
+apply from: rootProject.file('gradle/bintrayUpload.gradle')
