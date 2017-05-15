@@ -2,7 +2,7 @@ package com.ldy.dbassist.compiler;
 
 import com.google.auto.common.SuperficialValidation;
 import com.ldy.dbassist.annotations.Table;
-import com.ldy.dbassist.compiler.assistparts.ABAssistPart;
+import com.ldy.dbassist.compiler.assistparts.base.ABAssistPart;
 import com.ldy.dbassist.compiler.assistparts.FiledPart;
 import com.ldy.dbassist.compiler.assistparts.CursorTransformPart;
 import com.ldy.dbassist.compiler.assistparts.Transform2ContentValuesPart;
@@ -48,14 +48,13 @@ public class DBAssistProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
-        System.out.println("process");
 
         for (Element element : roundEnvironment.getElementsAnnotatedWith(Table.class)) {
             if (!SuperficialValidation.validateElement(element)) continue;
 
             String packageName = elementUtils.getPackageOf(element).getQualifiedName().toString();
 
-            TypeSpec.Builder result = TypeSpec.classBuilder(ABAssistPart.getTabName((TypeElement) element) + "AssistDao")
+            TypeSpec.Builder result = TypeSpec.classBuilder(ABAssistPart.getTabName((TypeElement) element) + "DaoAssist")
                     .addModifiers(PUBLIC);
             try {
                 new FiledPart(messager).addPart(result, (TypeElement) element);

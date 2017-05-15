@@ -13,7 +13,7 @@ import javax.lang.model.element.TypeElement;
  * Created by ldy on 2017/5/12.
  */
 
-public class CreateIndexSqlPart extends ABAssistPart {
+public class CreateIndexSqlPart extends com.ldy.dbassist.compiler.assistparts.base.ABAssistPart {
     public CreateIndexSqlPart(Messager messager) {
         super(messager);
     }

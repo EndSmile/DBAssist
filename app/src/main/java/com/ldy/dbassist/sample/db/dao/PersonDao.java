@@ -4,15 +4,21 @@ package com.ldy.dbassist.sample.db.dao;
 import android.database.Cursor;
 
 import com.ldy.dbassist.sample.db.model.Person;
-import com.ldy.dbassist.sample.db.model.PersonAssistDao;
+import com.ldy.dbassist.sample.db.model.PersonDaoAssist;
 
 import java.util.List;
 
 /**
- * Created by ldy on 2017/5/12.
+ * 可以使用静态导入帮助类的形式，快捷使用帮助类生成的代码
  */
+import static com.ldy.dbassist.sample.db.model.PersonDaoAssist.*;
 
-public class PersonDao extends PersonAssistDao {
+/**
+ * Created by ldy on 2017/5/12.
+ * <p>
+ * 继承apt生成的类
+ */
+public class PersonDao extends BaseDao {
 
     private static final PersonDao instance = new PersonDao();
 
@@ -39,6 +45,12 @@ public class PersonDao extends PersonAssistDao {
 
     public List<Person> findAll() {
         Cursor cursor = database.rawQuery(replace("select * from ?", TABLE_NAME), null);
+        return cursorTransform(cursor);
+    }
+
+    public List<Person> findFromDep(long depId){
+        Cursor cursor = database.rawQuery(replace("select * from ? where ?=?", TABLE_NAME,DEP_ID,
+                String.valueOf(depId)), null);
         return cursorTransform(cursor);
     }
 

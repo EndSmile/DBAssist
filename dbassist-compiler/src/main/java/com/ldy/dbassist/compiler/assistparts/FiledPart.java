@@ -16,7 +16,7 @@ import javax.lang.model.element.TypeElement;
  * Created by ldy on 2017/5/11.
  */
 
-public class FiledPart extends ABAssistPart {
+public class FiledPart extends com.ldy.dbassist.compiler.assistparts.base.ABAssistPart {
 
     public FiledPart(Messager messager) {
         super(messager);
@@ -37,21 +37,10 @@ public class FiledPart extends ABAssistPart {
         }
 
         for (Element childElement : tabElement.getEnclosedElements()) {
-            if (!isField(childElement)) {
+            if (!isColumn(childElement)) {
                 continue;
             }
-            if (childElement.getAnnotation(NonColumn.class) != null) {
-                continue;
-            }
-
-            String columnName;
-            Column column = childElement.getAnnotation(Column.class);
-            if (column == null || Utils.empty(column.value())) {
-                columnName = childElement.getSimpleName().toString();
-            } else {
-                columnName = column.value();
-            }
-            Utils.addStrConstant(typeSpecBuilder, columnName);
+            Utils.addStrConstant(typeSpecBuilder, getColumnName(childElement));
         }
     }
 

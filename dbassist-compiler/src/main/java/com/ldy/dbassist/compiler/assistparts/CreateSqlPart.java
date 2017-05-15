@@ -1,6 +1,7 @@
 package com.ldy.dbassist.compiler.assistparts;
 
 import com.ldy.dbassist.annotations.PrimaryKey;
+import com.ldy.dbassist.compiler.assistparts.base.ColumnType;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeVariableName;
@@ -10,7 +11,6 @@ import java.util.List;
 import javax.annotation.processing.Messager;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
 import static javax.lang.model.element.Modifier.PUBLIC;
@@ -20,7 +20,7 @@ import static javax.lang.model.element.Modifier.STATIC;
  * Created by ldy on 2017/5/11.
  * 添加创建表的sql语句的方法
  */
-public class CreateSqlPart extends ABAssistPart {
+public class CreateSqlPart extends com.ldy.dbassist.compiler.assistparts.base.ABAssistPart {
 
     public CreateSqlPart(Messager messager) {
         super(messager);

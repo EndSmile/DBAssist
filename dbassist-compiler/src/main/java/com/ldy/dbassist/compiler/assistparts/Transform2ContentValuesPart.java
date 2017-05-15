@@ -15,7 +15,7 @@ import static javax.lang.model.element.Modifier.STATIC;
 /**
  * Created by ldy on 2017/5/12.
  */
-public class Transform2ContentValuesPart extends ABAssistPart {
+public class Transform2ContentValuesPart extends com.ldy.dbassist.compiler.assistparts.base.ABAssistPart {
     public static final String TYPE_VALUES = "android.content.ContentValues";
     public static final String METHOD_NAME = "transform2ContentValues";
 

@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
  * Created by ldy on 2017/5/11.
  */
 @Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 public @interface NonColumn {
 }

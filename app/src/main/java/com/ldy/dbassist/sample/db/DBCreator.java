@@ -5,7 +5,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.ldy.dbassist.sample.App;
 import com.ldy.dbassist.sample.db.dao.PersonDao;
-import com.ldy.dbassist.sample.db.model.PersonAssistDao;
+import com.ldy.dbassist.sample.db.model.DepartmentDaoAssist;
+import com.ldy.dbassist.sample.db.model.PersonDaoAssist;
 
 
 /**
@@ -30,7 +31,7 @@ public class DBCreator extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(PersonDao.getCreateSql());
+        db.execSQL(PersonDaoAssist.getCreateSql());
     }
 
     @Override

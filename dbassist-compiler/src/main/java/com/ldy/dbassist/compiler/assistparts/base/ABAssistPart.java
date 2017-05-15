@@ -1,10 +1,10 @@
-package com.ldy.dbassist.compiler.assistparts;
+package com.ldy.dbassist.compiler.assistparts.base;
 
 import com.ldy.dbassist.annotations.Column;
 import com.ldy.dbassist.annotations.NonColumn;
+import com.ldy.dbassist.annotations.PrimaryKey;
 import com.ldy.dbassist.annotations.Table;
 import com.ldy.dbassist.compiler.Utils;
-import com.squareup.javapoet.TypeSpec;
 
 import javax.annotation.processing.Messager;
 import javax.lang.model.element.Element;
@@ -47,7 +47,8 @@ public abstract class ABAssistPart implements IAddPart {
             if (table.allFields()) {
                 return element.getAnnotation(NonColumn.class) == null;
             } else {
-                return element.getAnnotation(Column.class) != null;
+                return element.getAnnotation(Column.class) != null
+                        || element.getAnnotation(PrimaryKey.class) != null;
             }
         }
         return false;
@@ -60,8 +61,11 @@ public abstract class ABAssistPart implements IAddPart {
     protected static String getColumnName(Element childElement) {
         String columnName;
         Column column = childElement.getAnnotation(Column.class);
+        PrimaryKey primaryKey = childElement.getAnnotation(PrimaryKey.class);
         if (column != null && !Utils.empty(column.value())) {
             columnName = column.value();
+        } else if (primaryKey != null && !Utils.empty(primaryKey.value())) {
+            columnName = primaryKey.value();
         } else {
             columnName = childElement.getSimpleName().toString();
         }

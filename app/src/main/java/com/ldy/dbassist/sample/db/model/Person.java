@@ -1,5 +1,6 @@
 package com.ldy.dbassist.sample.db.model;
 
+import com.ldy.dbassist.annotations.NonColumn;
 import com.ldy.dbassist.annotations.PrimaryKey;
 import com.ldy.dbassist.annotations.Table;
 import com.ldy.dbassist.sample.db.dao.BaseDao;
@@ -15,6 +16,10 @@ public class Person {
     String name;
     boolean isMale;
     Integer age;
+    long depId;
+
+    @NonColumn
+    String remark;
 
     public long getId() {
         return id;
@@ -56,6 +61,15 @@ public class Person {
         this.age = age;
     }
 
+
+    public long getDepId() {
+
+        return depId;
+    }
+
+    public void setDepId(long depId) {
+        this.depId = depId;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,6 +79,7 @@ public class Person {
 
         if (id != person.id) return false;
         if (isMale != person.isMale) return false;
+        if (depId != person.depId) return false;
         if (code != null ? !code.equals(person.code) : person.code != null) return false;
         if (name != null ? !name.equals(person.name) : person.name != null) return false;
         return age != null ? age.equals(person.age) : person.age == null;
@@ -78,6 +93,7 @@ public class Person {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (isMale ? 1 : 0);
         result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (int) (depId ^ (depId >>> 32));
         return result;
     }
 
@@ -89,6 +105,7 @@ public class Person {
                 ", name='" + name + '\'' +
                 ", isMale=" + isMale +
                 ", age=" + age +
+                ", depId=" + depId +
                 '}';
     }
 }

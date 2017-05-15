@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.FIELD)
 public @interface PrimaryKey {
-    String name() default "";
+    String value() default "";
     boolean autoincrement() default false;
 }

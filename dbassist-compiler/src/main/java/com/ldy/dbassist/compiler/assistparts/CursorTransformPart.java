@@ -1,17 +1,14 @@
 package com.ldy.dbassist.compiler.assistparts;
 
 import com.ldy.dbassist.compiler.Utils;
-import com.squareup.javapoet.CodeBlock;
+import com.ldy.dbassist.compiler.assistparts.base.ColumnType;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeVariableName;
 
-import java.util.List;
-
 import javax.annotation.processing.Messager;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
 import static javax.lang.model.element.Modifier.PUBLIC;
@@ -20,7 +17,7 @@ import static javax.lang.model.element.Modifier.STATIC;
 /**
  * Created by ldy on 2017/5/12.
  */
-public class CursorTransformPart extends ABAssistPart {
+public class CursorTransformPart extends com.ldy.dbassist.compiler.assistparts.base.ABAssistPart {
     public static final String TYPE_VALUES = "android.database.Cursor";
     public static final String METHOD_NAME = "cursorTransform";
 

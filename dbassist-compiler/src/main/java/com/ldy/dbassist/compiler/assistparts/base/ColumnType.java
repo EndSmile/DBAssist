@@ -1,6 +1,4 @@
-package com.ldy.dbassist.compiler.assistparts;
-
-import com.ldy.dbassist.compiler.Utils;
+package com.ldy.dbassist.compiler.assistparts.base;
 
 import javax.lang.model.type.TypeMirror;
 

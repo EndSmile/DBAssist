@@ -1,4 +1,4 @@
-package com.ldy.dbassist.compiler.assistparts;
+package com.ldy.dbassist.compiler.assistparts.base;
 
 import com.squareup.javapoet.TypeSpec;
 

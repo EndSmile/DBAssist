@@ -57,7 +57,7 @@ public class Utils {
     }
 
     public static boolean empty(String string) {
-        return string != null && !string.isEmpty();
+        return string == null || string.isEmpty();
     }
 
     /**
