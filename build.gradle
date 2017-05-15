@@ -23,6 +23,7 @@ allprojects {
     }
     repositories {
         jcenter()
+        maven{ url 'https://dl.bintray.com/endsmile1993/maven'}
     }
 }
 

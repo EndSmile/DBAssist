@@ -28,8 +28,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta1'
     testCompile 'junit:junit:4.12'
-    testCompile "org.robolectric:robolectric:3.3.2"
-
-    annotationProcessor project(':dbassist-compiler')
-    compile project(':dbassist-annotations')
+    annotationProcessor 'org.robolectric:robolectric:3.3.2'
+//    annotationProcessor project(':dbassist-compiler')
+//    provided project(':dbassist-annotations')
+    annotationProcessor "com.ldy:dbassist-compiler:0.2.0"
+    //只在编译期使用
+    provided 'com.ldy:dbassist-annotations:0.2.0'
 }

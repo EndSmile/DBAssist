@@ -3,7 +3,9 @@
 
 非常小巧，只是帮助生成assist类，只需要依赖一个只在编译期生效的注解库
 
-通过对Moudle类进行简单的注解，生成一个dao层的assist类，用户可以继承这个assist类，assist类中会生成大量繁重的代码，继承者就可以只关心业务逻辑了
+通过对Module类进行简单的注解，生成一个dao层的assist类，大多数情况下这个类会产生一些常量和`public static`方法
+
+用户可以选择引用(推荐静态导入)或继承这个assist类，assist类中会生成大量繁重的代码，使用者就可以只关心业务逻辑了
 
 目前包括的有：
 1. 表名，列名生成，且支持将表名设为变量
@@ -11,6 +13,13 @@
 3. Module转换为ContentValues函数，且支持自定义列
 4. cursor转换为moduleList函数，且支持自定义列
 5. 为生成类指定父类
+
+**使用**
+```
+annotationProcessor 'com.ldy:dbassist-compiler:0.2.0'
+//只在编译期使用
+provided 'com.ldy:dbassist-annotations:0.2.0'
+```
 
 **Module类**
 ```
